@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.monte.media.math.Rational;
-import org.monte.media.Format;
+//import org.monte.media.math.Rational;
+//import org.monte.media.Format;
 import org.monte.screenrecorder.ScreenRecorder;
 
 import static org.monte.media.AudioFormatKeys.*;
@@ -34,6 +34,18 @@ public class utils {
             Properties p = new Properties();
             p.load(reader);
             value = p.getProperty(name);
+        } catch (Exception e) {
+            System.out.println("Error in reading properties file: " + e.getMessage());
+        }
+        return value;
+    }
+
+    public static boolean readProperties_File(boolean name) {
+        boolean value = false;
+        try (FileReader reader = new FileReader(baseDir + "\\config.properties")) {
+            Properties p = new Properties();
+            p.load(reader);
+            value = Boolean.parseBoolean(p.getProperty(String.valueOf(name)));
         } catch (Exception e) {
             System.out.println("Error in reading properties file: " + e.getMessage());
         }
@@ -152,7 +164,7 @@ public class utils {
             // This is needed for ScreenRecorder class.
             GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 
-            // Create a instance of ScreenRecorder with the required configurations
+            // Create an instance of ScreenRecorder with the required configurations
             screenRecorder = new ScreenRecorder(gc, null, new Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, MIME_QUICKTIME),
                     new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, ENCODING_QUICKTIME_JPEG, CompressorNameKey, ENCODING_QUICKTIME_JPEG, DepthKey, (int) 24, FrameRateKey, Rational.valueOf(15), QualityKey, 0.2f, KeyFrameIntervalKey, (int) (15 * 60)),
                     new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black", FrameRateKey, Rational.valueOf(30)), null, new File(Path));
