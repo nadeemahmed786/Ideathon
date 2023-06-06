@@ -40,18 +40,6 @@ public class utils {
         return value;
     }
 
-    public static boolean readProperties_File(boolean name) {
-        boolean value = false;
-        try (FileReader reader = new FileReader(baseDir + "\\config.properties")) {
-            Properties p = new Properties();
-            p.load(reader);
-            value = Boolean.parseBoolean(p.getProperty(String.valueOf(name)));
-        } catch (Exception e) {
-            System.out.println("Error in reading properties file: " + e.getMessage());
-        }
-        return value;
-    }
-
     /**
      * Compresses a list of files to a destination zip file
      * @param listFiles A collection of files and directories

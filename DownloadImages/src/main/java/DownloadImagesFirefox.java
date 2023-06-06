@@ -58,7 +58,7 @@ public class DownloadImagesFirefox {
                     options.addArguments("--disable-extensions");
                     options.addArguments("--no-sandbox");
                     options.addArguments("--disable-dev-shm-usage");
-                    if (utils.readProperties_File(Boolean.parseBoolean("headless"))) {
+                    if (utils.readPropertiesFile("headless").contains("true")) {
                         options.addArguments("--headless=new");
                     }
                     options.addArguments("--window-size=" + Integer.parseInt(width) + "," + Integer.parseInt(height));
@@ -74,7 +74,7 @@ public class DownloadImagesFirefox {
                     FirefoxOptions options = new FirefoxOptions();
                     options.setBinary(firefoxBinary);
                     options.addArguments("--disable-notifications");
-                    if (utils.readProperties_File(Boolean.parseBoolean("headless"))) {
+                    if (utils.readPropertiesFile("headless").contains("true")) {
                         options.addArguments("-headless");
                     }
 
